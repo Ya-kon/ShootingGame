@@ -34,4 +34,12 @@ public class BulletMove : MonoBehaviour
             Destroy(this.gameObject); //とりあえず破壊
         }
     }
+
+    /*
+     * トリガーイベント
+    */
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(this.gameObject);
+    }
 }
