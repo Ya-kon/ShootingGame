@@ -5,7 +5,7 @@ using UnityEngine;
 /*
  * 移動を管理
 */
-public class Move : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     #region constant variables
     private const float ZERO_INPUT_VAL = 0.0f;
@@ -13,22 +13,22 @@ public class Move : MonoBehaviour
     private const string YINPUT_NAME = "Vertical";
     #endregion  //constant variables
 
+    #region  private variables
+    private bool isConnectedJoyStick = false; //ゲームパッドが接続されているかどうか
+    private Vector2 speed　= new Vector2(0.0f, 0.0f);　//移動量
+    #endregion //private variables
+
     # region public variables
     public float MIN_INPUT_VAL;　//入力除外値
     public float speedMultiply; //スピードに掛ける値
     #endregion  //public variables
-
-    #region  private variables
-    private bool isConnectedJoyStick = false; //ゲームパッドが接続されているかどうか
-    private Vector2 speed;　//移動量
-    #endregion //private variables
 
     /*
      * 初期化処理 
     */
     void Start()
     {
-
+        
     }
 
     /*
