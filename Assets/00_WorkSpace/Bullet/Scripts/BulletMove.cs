@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletMove : MonoBehaviour
 {
     #region private variables
-    private bool isDead = false;
+    private bool isKill = false; // 死滅しているかどうか
     #endregion // private variables
 
 
@@ -14,21 +14,18 @@ public class BulletMove : MonoBehaviour
     public float lifeSpan; //生存時間
     #endregion //public variables
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
+    /*
+     * 更新処理
+    */
     void Update()
     {
         lifeSpan = lifeSpan - Time.deltaTime;
         if (lifeSpan < 0)
         {
-            isDead = true;
+            isKill = true;
         }
 
-        if (!isDead)
+        if (!isKill)
         {
             this.transform.Translate(speed * Time.deltaTime, 0.0f, 0.0f);
         }

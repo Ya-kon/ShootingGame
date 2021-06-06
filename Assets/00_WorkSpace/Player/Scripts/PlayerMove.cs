@@ -24,21 +24,14 @@ public class PlayerMove : MonoBehaviour
     #endregion  //public variables
 
     /*
-     * 初期化処理 
-    */
-    void Start()
-    {
-        
-    }
-
-    /*
      * 更新処理
     */
     void Update()
     {
-        //ジョイスティックが接続されているかどうかを判断
+        //------------------------------
+        // ジョイスティックが接続されているかどうかを判断
         var JoyStickNames = Input.GetJoystickNames();
-        if (JoyStickNames[0] == "") isConnectedJoyStick = false;
+        if (JoyStickNames[0] == null) isConnectedJoyStick = false;
         else isConnectedJoyStick = true;
 
         //------------------------------
