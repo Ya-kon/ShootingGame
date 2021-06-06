@@ -14,11 +14,12 @@ public class PlayerAttack : MonoBehaviour
 
     #region private variables
     private GameObject Bullet = null;
-    private float shotspersecond;  //内部で確認する用
+    private float shotPerSecondTimer = 0.0f;
+    private bool isSingleShot = true; //単発撃ちかどうか
     #endregion //private variables
 
     #region public variables
-    public float shotsPerSecond;
+    public float shotsPerSecondTime;
     #endregion //public variables
 
     /*
@@ -27,7 +28,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         Bullet = (GameObject)Resources.Load(BULLET_NAME); //とりあえずResouce.Loadを使う
-        shotspersecond = shotsPerSecond;
+        shotPerSecondTimer = shotsPerSecondTime;
     }
 
     /*
@@ -35,16 +36,32 @@ public class PlayerAttack : MonoBehaviour
     */
     void Update()
     {
-        if(Input.GetButton(ATTACK_BTN))
+        //------------------------------
+        // 連続撃ち用入力
+        if (Input.GetButton(ATTACK_BTN))
         {
-            shotspersecond -= Time.deltaTime;
+            shotPerSecondTimer -= Time.deltaTime;
 
-            if(shotspersecond < 0)
+            if(shotPerSecondTimer <= 0)
             {
+                isSingleShot = false;
                 //弾を発射
                 Instantiate(Bullet, this.transform.position, Quaternion.identity);
-                shotspersecond = shotsPerSecond;
+                shotPerSecondTimer = shotsPerSecondTime;
             }
+        }
+
+        //------------------------------
+        // 単発撃ち用入力
+        if (Input.GetButtonUp(ATTACK_BTN))
+        {
+            if (isSingleShot)
+            {
+                if (shotPerSecondTimer > 0) Instantiate(Bullet, this.transform.position, Quaternion.identity);
+            }
+
+            shotPerSecondTimer = shotsPerSecondTime;
+            isSingleShot = true;
         }
     }
 }
